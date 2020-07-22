@@ -1,11 +1,17 @@
 .maincontent{
 	float: left;
+	display: block;
 	background-color: white;
 	padding: 20px;
 	width: 65%;
 	height: auto;
 	margin-top: 10px;
 }
+.maincontentUPpart{
+	position: relative;
+	width: 100%;
+}
+
 .headiconblock{
 	float: left;
 }
@@ -14,6 +20,8 @@
 	height: 50px;
 	border-radius: 50%;
 }
+
+
 .usercontent{
 	float: left;
 	margin-left: 10px;
@@ -24,9 +32,8 @@
 	margin-bottom: 5px;
 }
 .usernormalinfo{
-	display: inline;
+	float: left;
 	font-size: medium;
-	margin-top: 10px;
 }
 .usersendtime{
 	float: left;
@@ -39,12 +46,20 @@
 	float: left;
 	margin-left: 10px;
 }
+
+
+
+
+.maincontentDOWNpart{
+	width: 100%;
+	position: relative;
+}
 .MomentInfo{
-	float: left;
+	position: relative;
 	margin-top: 5px;
 }
 .MomentText{
-	float: left;
+	
 	margin-top: 10px;
 }
 .MomentImg{
