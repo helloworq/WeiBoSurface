@@ -7,62 +7,40 @@
 	height: auto;
 	margin-top: 10px;
 }
-.maincontentUPpart{
-	position: relative;
-	width: 100%;
-}
-
-.headiconblock{
-	float: left;
-}
 .headicon{
+	float: left;
 	width: 50px;
 	height: 50px;
 	border-radius: 50%;
 }
-
-
 .usercontent{
-	float: left;
-	margin-left: 10px;
+    float: left;
+    margin-left: 10px;
 }
 .username{
-	font-weight: bold;
-	font-size: large;
-	margin-bottom: 5px;
+    font-weight: bold;
+    font-size: large;
+    margin-bottom: 5px;
 }
 .usernormalinfo{
-	float: left;
-	font-size: medium;
+    font-size: medium;
 }
 .usersendtime{
-	float: left;
+    float: left;
 }
 .userdevice{
-	float: left;
-	margin-left: 10px;
+    float: left;
+    margin-left: 10px;
 }
 .usermonmentstatus{
-	float: left;
-	margin-left: 10px;
-}
-
-
-
-
-.maincontentDOWNpart{
-	width: 100%;
-	position: relative;
+    float: left;
+    margin-left: 10px;
 }
 .MomentInfo{
-	position: relative;
-	margin-top: 5px;
+	margin-top: 10px;
+	float: left;
 }
 .MomentText{
-	
-	margin-top: 10px;
-}
-.MomentImg{
-	width: 200px;
-	height: 200px;
+	font-size: medium;
+	margin-bottom: 10px;
 }
