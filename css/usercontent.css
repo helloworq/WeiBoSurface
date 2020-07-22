@@ -1,0 +1,53 @@
+.maincontent{
+	float: left;
+	background-color: white;
+	padding: 20px;
+	width: 65%;
+	height: auto;
+	margin-top: 10px;
+}
+.headiconblock{
+	float: left;
+}
+.headicon{
+	width: 50px;
+	height: 50px;
+	border-radius: 50%;
+}
+.usercontent{
+	float: left;
+	margin-left: 10px;
+}
+.username{
+	font-weight: bold;
+	font-size: large;
+	margin-bottom: 5px;
+}
+.usernormalinfo{
+	display: inline;
+	font-size: medium;
+	margin-top: 10px;
+}
+.usersendtime{
+	float: left;
+}
+.userdevice{
+	float: left;
+	margin-left: 10px;
+}
+.usermonmentstatus{
+	float: left;
+	margin-left: 10px;
+}
+.MomentInfo{
+	float: left;
+	margin-top: 5px;
+}
+.MomentText{
+	float: left;
+	margin-top: 10px;
+}
+.MomentImg{
+	width: 200px;
+	height: 200px;
+}
