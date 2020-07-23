@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="css/usercontent.css">
 	<link rel="stylesheet" href="css/longpic.css">
 	<link rel="stylesheet" href="css/userrelation.css">
+	<link rel="stylesheet" href="css/mynav.css">
 	<script src="css/layui/layui.js"></script>
 </head>
 <style>
@@ -14,18 +15,20 @@
 </style>
 <body>
 <div class="bodycontent" style="width: 1024px;height: auto; margin: 0 auto;">
-	
-<div id="nav">
-	<ul class="layui-nav">
-	  <li class="layui-nav-item"><a href="">最新活动</a></li>
-	  <li class="layui-nav-item layui-this">
-		<a href="javascript:;">产品</a>
-	  </li>
-	  <li class="layui-nav-item"><a href="">大数据</a></li>
-	  <li class="layui-nav-item">
-		<a href="javascript:;">解决方案</a>
-	  </li>
-	  <li class="layui-nav-item"><a href="">社区</a></li>
+
+<div class="nav">
+	<ul class="mynav">
+	    <li class="mynavli"><a class="active" href="#home">主页</a></li>
+	    <li class="mynavli"><a href="#news">新闻</a></li>
+	    <li class="mynavli"><a href="#contact">联系</a></li>
+	    <li class="mynavli"><a href="#about">关于</a></li>
+		<li class="mynavlibtn">
+		    <button class="writemsg" onclick="alert(\"sssssssss\")"></button>
+		</li>
+		<li class="mynavliinput">
+		    <input type="text" name="" id="" value="" class="searchsmt" placeholder="发现新鲜事"/>
+		</li>
+
 	</ul>
 </div>
 
@@ -337,10 +340,6 @@
 				
 			</div>
 		</div>
-
-
-
-
 </div>
 </body>
 </html>
