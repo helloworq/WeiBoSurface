@@ -33,8 +33,9 @@ input[type=text] {
   padding: 5px 10px 8px 40px;
 }
 .mynavlibtn{
-	padding: 7px;
 	float: right;
+	margin-top: -7px;
+	height: 30px;
 }
 .writemsg{
 	border: 0;
