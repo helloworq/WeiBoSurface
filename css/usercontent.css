@@ -43,4 +43,23 @@
 .MomentText{
 	font-size: medium;
 	margin-bottom: 10px;
+	position: relative;
+}
+.MomentImgBlock{
+	display: inline;
+	width: 100%;
+}
+.MomentImg{
+	display: inline;
+	width: 33%;
+}
+.useroperation{
+	margin-top: 20px;
+}
+.useroperationul{
+}
+.useroperationli{
+	width: 25%;
+	float: left;
+	text-align: center;
 }
