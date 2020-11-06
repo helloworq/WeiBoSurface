@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/layui/css/layui.css">
+    <script src="css/layui/layui.js"></script>
+    <script src="js/jquery-2.0.0.min.js"></script>
+</head>
+<style>
+    #box{
+        width: 500px;
+        height: 500px;
+        background-color: white;
+        border-style: solid;
+        border-width: 1px;
+        margin: 50px;
+    }
+    #header{
+        border-bottom-style: solid;
+        border-bottom-color: #92B8B1;
+        border-width: 1px;
+    }
+    #header_font{
+        padding: 10px;
+        font-size: medium;
+    }
+    #second{
+        width: 500px;
+    }
+    #second_count{
+        padding: 10px;
+        margin-right: 10px;
+        float: right;
+    }
+    #header_textarea{
+        resize: none;
+        width: 460px;
+        height: 100px;
+        margin-left: 20px;
+        float: left;
+    }
+    #thirth{
+        width: 500px;
+    }
+    #fourth{
+        width: 500px;
+    }
+    #header_bt{
+        float: right;
+        margin-right: 20px;
+        margin-top: 170px;
+    }
+</style>
+<body>
+<div id="box">
+    <div id="header">
+        <p id="header_font">有什么新鲜事想告诉大家？</p>
+    </div>
+    <div id="second">
+        <p id="second_count">已输入i字</p>
+    </div>
+    <div id="thirth">
+        <textarea id="header_textarea"></textarea>
+    </div>
+    <div class="layui-upload" style="float: left;margin-top: 10px;height: 260px">
+        <blockquote class="layui-elem-quote layui-quote-nm">
+            预览图：
+            <div class="layui-upload-list" id="demo2"></div>
+        </blockquote>
+    </div>
+    <div id="fourth" style="float: right">
+        <button type="button" class="layui-btn" id="test9" style="float: right;margin-right: 10px;margin-left: 10px">开始上传</button>
+        <button type="button" class="layui-btn layui-btn-normal" id="test8" style="float: right">选择文件</button>
+<!--        <button id="header_bt" type="button" class="layui-btn layui-btn-danger">发送动态</button>-->
+    </div>
+</div>
+</body>
+<script>
+    layui.use('upload', function(){
+        var $ = layui.jquery
+            ,upload = layui.upload;
+        //多图片上传
+        //选完文件后不自动上传
+        upload.render({
+            elem: '#test8'
+            ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+            ,auto: false
+            ,multiple: true
+            ,bindAction: '#test9'
+            ,choose: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo2').append('<img src="'+ result +'" alt="'+ file.name +'" class="layui-upload-img" style="width: 100px;height: 100px;margin-right: 10px">')
+                });
+            }
+            ,done: function(res){
+                layer.msg('上传成功');
+                console.log(res)
+            }
+        });
+
+    });
+</script>
+</html>

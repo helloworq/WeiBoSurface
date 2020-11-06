@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+
+</head>
+<body>
+
+<button id="bt">显示52.83.103.252:8093</button>
+
+<button id="bt1">显示192.168.1.40:18085</button>
+<script>
+    $("#bt").click(
+		function () {
+			$.ajax({
+				  url: 'http://52.83.103.252:8093/dgp-vs-server-web/vs/public/file/download/v1/624617' ,  
+				  type: 'GET',  
+				  data: {},
+				  //contentType: false,
+				  //processData: false,
+				  success: function (returndata) {
+					  alert(JSON.stringify(returndata))
+					  
+				  },  
+				  error: function (returndata) {  
+					  alert("3returndata");  
+				  }  
+			});  
+		}
+	);
+	
+	$("#bt1").click(
+		function () {
+			$.ajax({
+				  url: 'http://localhost:8080/dgp-vs-server-web/vs/public/file/list/v1' ,  
+				  type: 'GET',  
+				  data: {},
+				  //contentType: false,
+				  //processData: false,
+				  success: function (returndata) {
+					  alert(JSON.stringify(returndata))
+					  
+				  },  
+				  error: function (returndata) {  
+					  alert("3returndata");  
+				  }  
+			});  
+		}
+	);
+
+</script>
+</body>
+</html>
