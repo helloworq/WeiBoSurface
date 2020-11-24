@@ -297,30 +297,6 @@
 
 </body>
 <script>
-    //定义一些全局的url
-    var switcher=107
-
-    var url_getMainPageInfo
-    var url_getFriendMoment;
-    var url_fileUpload;
-    var url_like;
-    var url_collect;
-
-    if (switcher===107){
-        url_getMainPageInfo=url_getMainPageInfo_107
-        url_getFriendMoment=url_getFriendMoment_107
-        url_fileUpload = url_fileUpload_107
-        url_like = url_like_107
-        url_collect=url_collect_107
-    }
-    if (switcher===223){
-        url_getMainPageInfo=url_getMainPageInfo_223
-        url_getFriendMoment=url_getFriendMoment_223
-        url_fileUpload = url_fileUpload_223
-        url_like = url_like_223
-        url_collect=url_collect_223
-    }
-
     layui.use('upload', function () {
         var $ = layui.jquery
             , upload = layui.upload;

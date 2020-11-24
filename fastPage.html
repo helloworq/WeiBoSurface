@@ -6,6 +6,7 @@
     <script src="js/jquery-2.0.0.min.js"></script>
     <script src="css/layui/layui.js"></script>
     <link rel="stylesheet" href="css/layui/css/layui.css" media="all">
+    <script src="js/ManageUrl.js"></script>
 </head>
 <body>
 
@@ -98,7 +99,7 @@ Your browser does not support the audio element.
     //添加cookie
     $("#test9").on("click", function () {
         $.ajax({
-            url: 'http://192.168.1.107:6729/v1/rest/addCookie',
+            url: url_addCookie,
             type: "GET",
             dataType: "json",
             xhrFields   : {withCredentials: true},
@@ -113,7 +114,7 @@ Your browser does not support the audio element.
     //获取cookie
     $("#test11").on("click", function () {
         $.ajax({
-            url: 'http://192.168.1.107:6729/v1/rest/getCookie',
+            url: url_getCookie,
             xhrFields   : {withCredentials: true},
             crossDomain : true,
             type: "GET",
