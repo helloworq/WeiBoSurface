@@ -12,16 +12,39 @@
     <legend>上传多张图片</legend>
 </fieldset>
 
-<div class="layui-upload">
+<!--<div class="layui-upload">
     <button type="button" class="layui-btn" id="test2">多图片上传</button>
     <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
         预览图：
         <div class="layui-upload-list" id="demo2"></div>
     </blockquote>
-</div>
+</div>-->
+<p id="ttt">1</p>
+<p id="ttt">1</p>
+<p id="ttt">1</p>
+
+
+<button id="bt">点击</button>
 </body>
 <script>
-    layui.use('upload', function(){
+$("#bt").click(function () {
+    $("[id=ttt]").each(function(){
+        $(this).text("2");
+    });
+})
+
+
+/*$(document).scroll(
+    function() {
+        var a=(Math.floor($(document).scrollTop()) + window.innerHeight)
+        var b=($(document).height()-1)
+        console.log(typeof a+"=>"+(a)+"===>"+typeof b+"=>"+(b)+"")
+        console.log(($(document).height()-1)===a||($(document).height()-1)===(a+1))
+        if (($(document).height()-1)===a) {
+            $("#pre").html($("#pre").html()+'<div id="pre1">2</div>')
+        }
+    });*/
+/*    layui.use('upload', function(){
         var upload = layui.upload;
         var layer = layui.layer;
         //执行实例
@@ -40,6 +63,6 @@
                     //上传完毕
                 }
             });
-    });
+    });*/
 </script>
 </html>

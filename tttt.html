@@ -1,148 +1,156 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8"/>
     <title></title>
     <script src="js/jquery-2.0.0.min.js"></script>
     <script src="css/layui/layui.js"></script>
-	<link rel="stylesheet" href="css/layui/css/layui.css"  media="all">
+    <link rel="stylesheet" href="css/layui/css/layui.css" media="all">
 </head>
 <body>
 
 
 <form class="layui-form" action="" style="width: 30%;height: 1200px;float: left;">
-  <div class="layui-form-item">
-    <label class="layui-form-label">id</label>
-    <div class="layui-input-block">
-      <input type="text" id="in1" name="title" lay-verify="title" autocomplete="off" placeholder="请输入id" class="layui-input">
+    <div class="layui-form-item">
+        <label class="layui-form-label">id</label>
+        <div class="layui-input-block">
+            <input type="text" id="in1" name="title" lay-verify="title" autocomplete="off" placeholder="请输入id"
+                   class="layui-input">
+        </div>
     </div>
-  </div>
-  
-  <div class="layui-form-item">
-    <label class="layui-form-label">layerId</label>
-    <div class="layui-input-block">
-      <input type="text" id="in2" name="title" lay-verify="title" autocomplete="off" placeholder="请输入layerId" class="layui-input">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">layerId</label>
+        <div class="layui-input-block">
+            <input type="text" id="in2" name="title" lay-verify="title" autocomplete="off" placeholder="请输入layerId"
+                   class="layui-input">
+        </div>
     </div>
-  </div>
-  
-  <div class="layui-form-item">
-    <label class="layui-form-label">objectId</label>
-    <div class="layui-input-block">
-      <input type="text" id="in3" name="title" lay-verify="title" autocomplete="off" placeholder="请输入objectId" class="layui-input">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">objectId</label>
+        <div class="layui-input-block">
+            <input type="text" id="in3" name="title" lay-verify="title" autocomplete="off" placeholder="请输入objectId"
+                   class="layui-input">
+        </div>
     </div>
-  </div>
-  
-  <input type="file" name="file" id="file" multiple="multiple" style="float: left;">
-  <input type="button" value="提交" onclick="doUpload()" style="float: left;margin-top: 10px;">
-  
-  <input type="button" value="查看巡查任务" onclick="getPatrolList()" style="float: left;margin-top: 10px;">
-  
-<div id="patrolList">
-  
-  <div id="patrol" onclick="getSpecificPatrolImg()">
-	  <ul id="patrolListArea" style="float: left;width: 100%;padding: 5px;">
-		  <!-- <li style="border-style:solid;border-width:1px;padding: 10px;margin-top: 5px;">
-			  <label>巡查任务Id:</lable><label id="patrolTaskId">1</label>
-			  <label>图块Id:</lable><label id="patrolBlockId">2</label>
-			  <label>layerId:</lable><label id="patrolLayerId">2</label>
-			  <label>objectId:</lable><label id="patrolObjectId">2</label>
-		  </li> -->
-	  </ul>
-  </div>
-  
-</div>
-  
+
+    <input type="file" name="file" id="file" multiple="multiple" style="float: left;">
+    <input type="button" value="提交" onclick="doUpload()" style="float: left;margin-top: 10px;">
+
+    <input type="button" value="查看巡查任务" onclick="getPatrolList()" style="float: left;margin-top: 10px;">
+
+    <div id="patrolList">
+
+        <div id="patrol" onclick="getSpecificPatrolImg()">
+            <ul id="patrolListArea" style="float: left;width: 100%;padding: 5px;">
+                <!-- <li style="border-style:solid;border-width:1px;padding: 10px;margin-top: 5px;">
+                    <label>巡查任务Id:</lable><label id="patrolTaskId">1</label>
+                    <label>图块Id:</lable><label id="patrolBlockId">2</label>
+                    <label>layerId:</lable><label id="patrolLayerId">2</label>
+                    <label>objectId:</lable><label id="patrolObjectId">2</label>
+                </li> -->
+            </ul>
+        </div>
+
+    </div>
+
 </form>
 
 <pre id="imgArea" style="float: left;padding: 50px;"></pre>
-<audio src="/i/horse.ogg" controls="controls">
+<!--<audio src="/i/horse.ogg" controls="controls">
 Your browser does not support the audio element.
-</audio>
+</audio>-->
+
+<button id="test9">添加cookie</button>
+<button id="test11">获取cookie</button>
 </body>
 
-    <!--<link href="layui/css/layui.css" rel="stylesheet" />
-    <script src="layui/layui.all.js"></script>-->
+<!--<link href="layui/css/layui.css" rel="stylesheet" />
+<script src="layui/layui.all.js"></script>-->
 <script>
-function doUpload() {  
-	var formData = new FormData();//这里需要实例化一个FormData来进行文件上传
-	formData.append("file",$( "#file" )[0].files[0]);
-	formData.append("file",$( "#file" )[0].files[1]);
-	formData.append("file",$( "#file" )[0].files[2]);
-	formData.append("file",$( "#file" )[0].files[3]);
-	formData.append("patrolId",$("#in1").val());
-	formData.append("layerId",$("#in2").val());
-	formData.append("objectId",$("#in3").val());
-	alert(formData)
-     $.ajax({  
-          url: 'http://localhost:8888/mulitFileUpload' ,  
-          type: 'POST',  
-          data: formData,
-          contentType: false,
-		  processData: false,
-          success: function (returndata) {  
-              alert("returndata");  
-          },  
-          error: function (returndata) {  
-              alert("3returndata");  
-          }  
-     });  
-} 
+    function doUpload() {
+        var formData = new FormData();//这里需要实例化一个FormData来进行文件上传
+        formData.append("file", $("#file")[0].files[0]);
+        formData.append("file", $("#file")[0].files[1]);
+        formData.append("file", $("#file")[0].files[2]);
+        formData.append("file", $("#file")[0].files[3]);
+        formData.append("patrolId", $("#in1").val());
+        formData.append("layerId", $("#in2").val());
+        formData.append("objectId", $("#in3").val());
+        alert(formData)
+        $.ajax({
+            url: 'http://192.168.1.107:6729/upload/file',
+            type: 'POST',
+            data: formData,
+            contentType: false,
+            processData: false,
+            success: function (returndata) {
+                alert("returndata");
+            },
+            error: function (returndata) {
+                alert("3returndata");
+            }
+        });
+    }
 
 
-function getSpecificPatrolImg(){
-	
-/* 	  $.ajax({  
-			  url: 'http://192.168.1.40:18085/dgp-omms-server-web/rest/omms/v1/patrol' ,  
-			  type: 'GET',  
-			  data: {"patrolId":$("#in1").val()},
-			  //contentType: false,
-			  //processData: false,
-			  success: function (returndata) {
-				  for (var i = 0; i < returndata.data.imagesUrl.length; i++) {
-					var url=returndata.data.imagesUrl[i];
-					var styles="width: 200px;height: 200px;";
-					console.log(url);
-					$("#imgArea").append("<img src=\"  "+url+ "\" style=\" "+styles+"  \"/>");
-				  }
-				for (var i = 0; i < returndata.data.audioUrl.length; i++) {
-					var url=returndata.data.audioUrl[i];
-					var styles="width: 200px;height: 200px;";
-					console.log(url);
-					$("#imgArea").append("<audio src=\"  "+url+ "\" style=\" "+styles+"  \"/>");
-				}
-			  },
-			  error: function (returndata) {  
-				  alert("3returndata");  
-			  }  
-		 });  */
-}
+    //添加cookie
+    $("#test9").on("click", function () {
+        $.ajax({
+            url: 'http://192.168.1.107:6729/v1/rest/addCookie',
+            type: "GET",
+            dataType: "json",
+            xhrFields   : {withCredentials: true},
+            crossDomain : true,
+            async: false,
+            data: {'cookieValue': '齐天大圣'},
+            success: function (result) {
 
-function getPatrolList(){//获取巡查任务列表
-    var res;
-	$.ajax({
-		  url: 'http://192.168.1.40:18085/dgp-omms-server-web/rest/omms/v1/patrol/list' ,  
-		  type: 'GET',  
-		  data: {},
-		  //contentType: false,
-		  //processData: false,
-		  success: function (returndata) {
-			  for (var i = 0; i < returndata.data.length; i++) {
-				console.log(returndata.data[i]);
-				var a="\t\t  <li "+" id"+i+"style=\"border-style:solid;border-width:1px;padding: 10px;margin-top: 5px;\">\n" +
-						"\t\t\t  <label>巡查任务Id:</lable><label id=\"patrolTaskId"+ i +"\">"+ returndata.data[i].id +"</label>\n" +
-						"\t\t\t  <label>图块Id:</lable><label id=\"patrolBlockId"+ i +"\">"+ returndata.data[i].blockrangeId +"</label>\n" +
-						"\t\t\t  <label>layerId:</lable><label id=\"patrolLayerId"+ i+"\">"+ returndata.data[i].layerId +"</label>\n" +
-						"\t\t\t  <label>objectId:</lable><label id=\"patrolObjectId"+ i +"\">"+ returndata.data[i].objectId +"</label>\n" +
-						"\t\t  </li>";
-				res+=a;
-			  }
-			  $("#patrolListArea").html(res);
-		  },  
-		  error: function (returndata) {  
-			  alert("3returndata");  
-		  }  
-	});  
-}
+            }
+        })
+    });
+    //获取cookie
+    $("#test11").on("click", function () {
+        $.ajax({
+            url: 'http://192.168.1.107:6729/v1/rest/getCookie',
+            xhrFields   : {withCredentials: true},
+            crossDomain : true,
+            type: "GET",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                layer.msg("success")
+            }
+        })
+    });
+
+    function getPatrolList() {//获取巡查任务列表
+        var res;
+        $.ajax({
+            url: 'http://192.168.1.40:18085/dgp-omms-server-web/rest/omms/v1/patrol/list',
+            type: 'GET',
+            data: {},
+            //contentType: false,
+            //processData: false,
+            success: function (returndata) {
+                for (var i = 0; i < returndata.data.length; i++) {
+                    console.log(returndata.data[i]);
+                    var a = "\t\t  <li " + " id" + i + "style=\"border-style:solid;border-width:1px;padding: 10px;margin-top: 5px;\">\n" +
+                        "\t\t\t  <label>巡查任务Id:</lable><label id=\"patrolTaskId" + i + "\">" + returndata.data[i].id + "</label>\n" +
+                        "\t\t\t  <label>图块Id:</lable><label id=\"patrolBlockId" + i + "\">" + returndata.data[i].blockrangeId + "</label>\n" +
+                        "\t\t\t  <label>layerId:</lable><label id=\"patrolLayerId" + i + "\">" + returndata.data[i].layerId + "</label>\n" +
+                        "\t\t\t  <label>objectId:</lable><label id=\"patrolObjectId" + i + "\">" + returndata.data[i].objectId + "</label>\n" +
+                        "\t\t  </li>";
+                    res += a;
+                }
+                $("#patrolListArea").html(res);
+            },
+            error: function (returndata) {
+                alert("3returndata");
+            }
+        });
+    }
 </script>
 
 </html>

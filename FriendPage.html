@@ -268,7 +268,65 @@
             </div>
 
             <div class="useroperation">
-                <ul class="useroperationul">
+                <ul class="useroperationul" id="1">
+                    <li class="useroperationli">
+                        <span><i class="iconfont iconshoucang"></i>收藏</span>
+                        <span class="collectcount">111</span>
+                    </li>
+                    <li class="useroperationli">
+                        <span><i class="iconfont iconicon--"></i>转发</span>
+                        <span class="sharecount">222</span>
+                    </li>
+                    <li class="useroperationli">
+                        <span onclick="loadComment()"><i class="iconfont iconpinglun"></i>评论</span>
+                        <span class="commentcount">333</span>
+                    </li>
+                    <li id="like" class="useroperationli">
+                        <span><i class="iconfont iconweibiaoti-" onclick="like(this.id)"></i></span>
+                        <span class="likecount">555</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="maincontent">
+        <div class="headiconblock">
+            <img class="headicon"
+                 src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"
+                 alt="Paris">
+        </div>
+        <div class="usercontent">
+            <div class="username">
+                齐天大圣
+            </div>
+            <div class="usernormalinfo">
+                <div class="usersendtime">
+                    9月初8
+                </div>
+                <div class="userdevice">
+                    苹果11pro
+                </div>
+                <div class="usermonmentstatus">
+                    已编辑
+                </div>
+            </div>
+        </div>
+        <div class="MomentInfo">
+            <div class="MomentText">
+                生活不止眼前的苟且，还有诗和远方。
+            </div>
+            <div class="MomentImgBlock">
+                <img class="MomentImg"
+                     src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=345252579,3981969551&fm=15&gp=0.jpg"/>
+                <img class="MomentImg"
+                     src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=345252579,3981969551&fm=15&gp=0.jpg"/>
+                <img class="MomentImg"
+                     src="https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=345252579,3981969551&fm=15&gp=0.jpg"/>
+            </div>
+
+            <div class="useroperation">
+                <ul class="useroperationul" id="2">
                     <li class="useroperationli">
                         <span><i class="iconfont iconshoucang"></i>收藏</span>
                         <span class="collectcount">111</span>
@@ -282,15 +340,13 @@
                         <span class="commentcount">333</span>
                     </li>
                     <li class="useroperationli">
-                        <span><i class="iconfont iconweibiaoti-"></i></span>
+                        <span><i id="like" class="iconfont iconweibiaoti-" onclick="like(this.id)"></i></span>
                         <span class="likecount">555</span>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-
-
 </div>
 
 
@@ -298,8 +354,8 @@
 <script>
     //定义一些全局的url
     var switcher=107
-    var url_getMainPageInfo_107 = 'http://192.168.1.107:6729/v1/rest/getMainPageInfo'
-    var url_getMainPageInfo_223 = 'http://192.168.2.223:6729/v1/rest/getMainPageInfo'
+    var url_getFriendMoment_107 = 'http://192.168.1.107:6729/v1/rest/getFriendMoment'
+    var url_getFriendMoment_223 = 'http://192.168.2.223:6729/v1/rest/getFriendMoment'
 
     var url_fileUpload_107 = 'http://192.168.1.107:6729/v1/rest/fileUpload'
     var url_fileUpload_223 = 'http://192.168.2.223:6729/v1/rest/fileUpload'
@@ -307,32 +363,29 @@
     var url_like_107 = 'http://192.168.1.107:6729/v1/rest/like'
     var url_like_223 = 'http://192.168.2.223:6729/v1/rest/like'
 
-    var url_getMainPageInfo
-    var url_fileUpload
-    var url_like
+    var url_getFriendMoment = url_getFriendMoment_107;
+    var url_fileUpload = url_fileUpload_107;
+    var url_like = url_like_107;
 
     if (switcher===107){
-        url_getMainPageInfo=url_getMainPageInfo_107
+        url_getFriendMoment=url_getFriendMoment_107
         url_fileUpload = url_fileUpload_107;
         url_like = url_like_107;
     }
     if (switcher===223){
-        url_getMainPageInfo=url_getMainPageInfo_223
+        url_getFriendMoment=url_getFriendMoment_223
         url_fileUpload = url_fileUpload_223
         url_like = url_like_223
     }
-
-
-
-
+    //预加载layui
     layui.use('upload', function () {
         var $ = layui.jquery
             , upload = layui.upload;
     });
 
-    window.onload = function () {
+    window.onload=function() {
         $.ajax({
-            url: url_getMainPageInfo,//此接口会当前用户的cookie返回所有动态
+            url: url_getFriendMoment,//此接口会当前用户的cookie返回所有动态
             type: "get",
             dataType: "json",
             async: false,
@@ -383,19 +436,19 @@
                         '            <div class="useroperation">\n' +
                         '                <ul class="useroperationul">\n' +
                         '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconshoucang"></i>收藏</span>\n' +
+                        '                        <span><i class="iconfont iconshoucang"></i>收藏</span>\n' +
                         '                        <span class="collectcount">' + elemet.collectCount + '</span>\n' +
                         '                    </li>\n' +
                         '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconicon--"></i>转发</span>\n' +
+                        '                        <span><i class="iconfont iconicon--"></i>转发</span>\n' +
                         '                        <span class="sharecount">' + elemet.shareCount + '</span>\n' +
                         '                    </li>\n' +
                         '                    <li class="useroperationli">\n' +
-                        '                        <span onclick="loadComment()"><i id="' + elemet.id + '" class="iconfont iconpinglun"></i>评论</span>\n' +
+                        '                        <span onclick="loadComment()"><i class="iconfont iconpinglun"></i>评论</span>\n' +
                         '                        <span class="commentcount">' + elemet.commentCount + '</span>\n' +
                         '                    </li>\n' +
                         '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconweibiaoti-" onclick="like(this.id)"></i></span>\n' +
+                        '                        <span><i class="iconfont iconweibiaoti-"></i></span>\n' +
                         '                        <span class="likecount">' + elemet.likeCount + '</span>\n' +
                         '                    </li>\n' +
                         '                </ul>\n' +
@@ -405,19 +458,19 @@
                     res.push(content + body + foot)
                 }
                 $("#momentblock").html(res)
-                $("#momentcount").text(result.data.moments.length)
+                /*$("#momentcount").text(result.data.moments.length)
                 $("[id=followcount]").each(function () {
                     $(this).text("2");
                 });
                 $("[id=fanscount]").each(function () {
                     $(this).text("2");
-                });
+                });*/
             }
         })
     }
 
-    function idEdit(flag) {
-        return flag == 0 ? "已编辑" : "未编辑"
+    function idEdit(flag){
+        return flag==0?"已编辑":"未编辑"
     }
 
     //加载评论脚本
@@ -531,23 +584,24 @@
     }
 
     function like(id) {
-        var form = new FormData();
-        form.append("momentId", id)
+        layer.msg('点赞成功！'+id, {icon: 1});
         $.ajax({
             url: url_like,
-            type: "get",
+            type: "post",
             dataType: "json",
-            async: true,
+            async: false,
             xhrFields: {withCredentials: true},
+            data: {"momentId":""},
             crossDomain: true,
-            //contentType: false,
-            //processData: false,
-            data: {"MomentId": id},
+            contentType: false,
+            processData: false,
+            data: form,
             success: function (result) {
-                if (result.code == 1000) {
-                    layer.msg('点赞成功！', {icon: 1});
+                if (result.code == 200) {
+                    layer.msg("上传成功！", {icon: 6});
+                    ifclose();
                 } else if (result.code == 500) {
-                    layer.msg('点赞失败！', {icon: 1});
+                    layer.msg(result.msg, {icon: 5});
                 }
             }
         })
