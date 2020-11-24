@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/mynav.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1963893_2cwb6qthxh5.css">
     <script src="css/layui/layui.js"></script>
+    <script src="js/ManageUrl.js"></script>
     <script src="js/jquery-2.0.0.min.js"></script>
 </head>
 <style>
@@ -354,28 +355,26 @@
 <script>
     //定义一些全局的url
     var switcher=107
-    var url_getFriendMoment_107 = 'http://192.168.1.107:6729/v1/rest/getFriendMoment'
-    var url_getFriendMoment_223 = 'http://192.168.2.223:6729/v1/rest/getFriendMoment'
 
-    var url_fileUpload_107 = 'http://192.168.1.107:6729/v1/rest/fileUpload'
-    var url_fileUpload_223 = 'http://192.168.2.223:6729/v1/rest/fileUpload'
-
-    var url_like_107 = 'http://192.168.1.107:6729/v1/rest/like'
-    var url_like_223 = 'http://192.168.2.223:6729/v1/rest/like'
-
-    var url_getFriendMoment = url_getFriendMoment_107;
-    var url_fileUpload = url_fileUpload_107;
-    var url_like = url_like_107;
+    var url_getMainPageInfo
+    var url_getFriendMoment;
+    var url_fileUpload;
+    var url_like;
+    var url_collect;
 
     if (switcher===107){
+        url_getMainPageInfo=url_getMainPageInfo_107
         url_getFriendMoment=url_getFriendMoment_107
-        url_fileUpload = url_fileUpload_107;
-        url_like = url_like_107;
+        url_fileUpload = url_fileUpload_107
+        url_like = url_like_107
+        url_collect=url_collect_107
     }
     if (switcher===223){
+        url_getMainPageInfo=url_getMainPageInfo_223
         url_getFriendMoment=url_getFriendMoment_223
         url_fileUpload = url_fileUpload_223
         url_like = url_like_223
+        url_collect=url_collect_223
     }
     //预加载layui
     layui.use('upload', function () {
@@ -584,24 +583,44 @@
     }
 
     function like(id) {
-        layer.msg('点赞成功！'+id, {icon: 1});
+        form.append("momentId", id)
         $.ajax({
             url: url_like,
-            type: "post",
+            type: "get",
             dataType: "json",
-            async: false,
+            async: true,
             xhrFields: {withCredentials: true},
-            data: {"momentId":""},
             crossDomain: true,
-            contentType: false,
-            processData: false,
-            data: form,
+            //contentType: false,
+            //processData: false,
+            data: {"MomentId": id},
             success: function (result) {
-                if (result.code == 200) {
-                    layer.msg("上传成功！", {icon: 6});
-                    ifclose();
+                if (result.code == 1000) {
+                    layer.msg('点赞成功！', {icon: 1});
                 } else if (result.code == 500) {
-                    layer.msg(result.msg, {icon: 5});
+                    layer.msg('点赞失败！', {icon: 1});
+                }
+            }
+        })
+    }
+
+    function collect(id) {
+        form.append("momentId", id)
+        $.ajax({
+            url: url_like,
+            type: "get",
+            dataType: "json",
+            async: true,
+            xhrFields: {withCredentials: true},
+            crossDomain: true,
+            //contentType: false,
+            //processData: false,
+            data: {"MomentId": id},
+            success: function (result) {
+                if (result.code == 1000) {
+                    layer.msg('收藏成功！', {icon: 1});
+                } else if (result.code == 500) {
+                    layer.msg('收藏失败！', {icon: 1});
                 }
             }
         })
