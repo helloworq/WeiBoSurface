@@ -1,0 +1,50 @@
+#box {
+    width: 500px;
+    height: 500px;
+    background-color: white;
+    border-width: 1px;
+    margin: 10px;
+}
+
+#header {
+    border-bottom-style: solid;
+    border-bottom-color: #92B8B1;
+    border-width: 1px;
+}
+
+#header_font {
+    padding: 10px;
+    font-size: medium;
+}
+
+#second {
+    width: 500px;
+}
+
+#second_count {
+    padding: 10px;
+    margin-right: 10px;
+    float: right;
+}
+
+#header_textarea {
+    resize: none;
+    width: 460px;
+    height: 100px;
+    margin-left: 20px;
+    float: left;
+}
+
+#thirth {
+    width: 500px;
+}
+
+#fourth {
+    width: 500px;
+}
+
+#header_bt {
+    float: right;
+    margin-right: 20px;
+    margin-top: 170px;
+}

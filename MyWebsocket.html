@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button onclick="connectServer()">连接服务器</button>
+
+</body>
+<script>
+    var websocket
+    var wsUri ="ws://192.168.2.136:8081/websocketTest/";
+    //打开连接
+    function connectServer() {
+        //websocket的房间
+        websocket = new WebSocket(wsUri);
+        websocket.onopen = function (evt) {
+            websocket.send("sam")
+        };
+        websocket.onmessage = async function(evt) {
+            console.log(evt.data)
+        }
+
+            /*fetch('http://somehost/somefile.zip').then(res => res.blob().then(blob => {
+                var a = document.createElement('a');
+                var url = window.URL.createObjectURL(blob);
+                var filename = 'myfile.zip';
+                a.href = url;
+                a.download = filename;
+                a.click();
+                window.URL.revokeObjectURL(url);
+            }))*/
+            //setTimeout(downloadblob(evt.data))
+
+        websocket.onerror = function(evt) {
+            onError(evt)
+        };
+    }
+
+    function printmsg(evt) {
+
+        console.log(evt)
+    }
+
+    function downloadblob(blob) {
+        // 创建一个blob链接
+        let url = URL.createObjectURL(blob)
+        let a = document.createElement('a')
+        a.setAttribute('download', url)
+        a.href=url;
+        a.style.display = 'none'
+        document.body.appendChild(a)
+        a.click()
+        document.body.removeChild(a)
+        // 每次调用URL.createObjectURL,都会创建一个新的URL对象，浏览器内存中会保持对该对象的引用
+        // 只有在document销毁时，才会释放此部分内存
+        // 在考虑性能的情况下，在url使用结束后，最好释放此部分内存
+        URL.revokeObjectURL(url)
+    }
+
+</script>
+</html>

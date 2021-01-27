@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/layui/css/layui.css">
+    <link rel="stylesheet" href="css/followfansmoment.css">
+    <link rel="stylesheet" href="css/userinfo.css">
+    <link rel="stylesheet" href="css/usercontent.css">
+    <link rel="stylesheet" href="css/longpic.css">
+    <link rel="stylesheet" href="css/userrelation.css">
+    <link rel="stylesheet" href="css/mynav.css">
+    <link rel="stylesheet" href="css/postMoment.css">
+    <link rel="stylesheet" href="http://at.alicdn.com/t/font_1963893_2cwb6qthxh5.css">
+    <script src="js/jquery-2.0.0.min.js"></script>
+    <script src="css/layui/layui.js"></script>
+    <script src="js/ManageUrl.js"></script>
+    <script src="js/operation.js"></script>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="./js/Vue2.6.12.js"></script>
+    <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script>
+</head>
+<style>
+    @import url("//unpkg.com/element-ui@2.14.1/lib/theme-chalk/index.css");
+</style>
+<body>
+<div class="bodycontent" style="width: 1024px;height: auto; margin: 0 auto;">
+
+    <div class="nav" id="app">
+        <ul class="mynav">
+            <li class="mynavli"><a class="active" href="MainPage.html">主页</a></li>
+            <li class="mynavli"><a href="FriendPage.html">好友动态</a></li>
+            <li class="mynavli"><a href="#news">我</a></li>
+            <li class="mynavli"><a href="#news">圈子</a></li>
+            <li class="mynavli"><a href="#about">关于</a></li>
+            <li class="mynavlibtn"><i class="iconfont iconxieweibo" @click="dialogVisible = true"></i></a></li>
+            <li class="mynavliinput"><input type="text" name="" id="" value="" class="searchsmt" placeholder="发现新鲜事"/>
+            </li>
+        </ul>
+
+        <div id="app1">
+            <!--<el-button type="text" @click="dialogVisible = true">上传动态</el-button>-->
+            <!--主容器-->
+            <el-dialog
+                    title="写动态"
+                    :visible.sync="dialogVisible"
+                    width="30%"
+            >
+                <el-input
+                        type="textarea"
+                        autosize
+                        :rows="5"
+                        placeholder="请输入内容"
+                        v-model="textarea"
+                        style="margin-bottom: 10px">
+                </el-input>
+
+                <!--图片部分-->
+                <el-upload
+                        ref="upload"
+                        action="http://localhost:8081/fileUploadTest"
+                        list-type="picture-card"
+                        :on-preview="handlePictureCardPreview"
+                        :on-remove="handleRemove"
+                        :auto-upload="false"
+                        :on-error="handleError"
+                        :on-success="submitSuccess"
+                        :multiple="true"
+                        :on-change="handleOnchange"
+                        :http-request="uploadFile"
+                >
+                    <i class="el-icon-plus"></i>
+                </el-upload>
+
+                <!--图片预览部分-->
+                <el-dialog :visible.sync="PictureCardPreview" :append-to-body="true">
+                    <img width="100%" :src="dialogImageUrl" alt="">
+                </el-dialog>
+
+                <!--确认上传按钮-->
+                <el-button style="margin-top: 10px;" size="small" type="success" @click="uploadFile">上传到服务器</el-button>
+
+            </el-dialog>
+        </div>
+    </div>
+    <div class="weiboheader">
+        <img class="weiboheaderpic"
+             src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=14356876,365809084&fm=26&gp=0.jpg"/>
+        <div class="headONlongpicPosition">
+            <img class="headONlongpic"
+                 src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg">
+        </div>
+        <div class="operaONlongpicPosition">
+            <button class="layui-btn layui-btn-danger"><i class="iconfont iconfabu2"></i> 关注</button>
+            <button class="layui-btn layui-btn-normal"><i class="iconfont iconfabu5"></i> 私信</button>
+        </div>
+    </div>
+
+
+</div>
+</body>
+<script>
+    var Main = {
+        data() {
+            return {
+                dialogImageUrl: '',         //预览的图片链接
+                dialogVisible: false,       //上传图片窗口开关
+                PictureCardPreview: false,   //预览图片开关
+                textarea: '',
+                formdata: []
+            };
+        },
+        methods: {
+            //手动模拟提交上传
+            //this.$refs.upload.submit();
+            uploadFile() {
+                var form = new FormData();
+                this.formdata.forEach(file => form.append("file", file.raw))
+                form.append("text", "text")
+                var refrence = this
+                $.ajax({
+                    url: "http://localhost:8081/fileUploadTest/",
+                    type: "post",
+                    dataType: "json",
+                    async: false,
+                    xhrFields: {withCredentials: true},
+                    crossDomain: true,
+                    contentType: false,
+                    processData: false,
+                    data: form,
+                    success: function (result) {
+                        refrence.$message.success('上传成功!');
+                        refrence.$refs.upload.clearFiles()
+                    }
+                })
+            },
+            handleRemove(file, fileList) {
+                console.log(fileList.length);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.PictureCardPreview = true;
+            },
+            handleError() {
+                this.$message.error('上传失败!请检查url是否正确');
+            },
+            handleOnchange(file, fileList) {
+                this.formdata.push(file)
+            },
+            submitSuccess() {
+                this.$refs.upload.clearFiles();
+                this.$message.error('上传成功!');
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+
+</script>
+</html>

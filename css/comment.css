@@ -1,0 +1,67 @@
+.card-wrap {
+    margin-bottom: 10px;
+    border-radius: 2px;
+    border: 1px solid #eee;
+    background: #fff;
+}
+.card {
+}
+.card-feed {
+    padding: 16px;
+    overflow: hidden;
+    position: relative;
+    top: 0px;
+}
+.card-feed .avator {
+    float: left;
+    display: inline;
+    width: 50px;
+    padding: 3px 0 6px;
+}
+.card-feed .content {
+    font-size: 14px;
+    margin-left: 60px;
+    line-height: 25px;
+    word-break: break-word;
+}
+.card-feed .from, .card-feed .from a {
+    font-size: 12px;
+    color: #808080;
+}
+.icon-act-praise {
+    width: 12px;
+    height: 13px;
+    background-position: -100px -25px;
+}
+.card-act {
+    border-top: 1px solid #eee;
+    overflow: hidden;
+    position: relative;
+    bottom: 0px;
+}
+
+.card-act ul{
+    position: relative;
+    bottom: 0px;
+}
+
+.card-act li {
+    width: 25%;
+    height: 38px;
+    line-height: 38px;
+    margin-left: -1px;
+    float: left;
+    text-align: center;
+}
+.card-act li a {
+    display: block;
+    height: 22px;
+    line-height: 22px;
+    margin: 7px 0;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-color: #d9d9d9;
+}
+.PCD_counter {
+    overflow: hidden;
+}

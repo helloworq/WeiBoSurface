@@ -10,73 +10,23 @@
     <link rel="stylesheet" href="css/longpic.css">
     <link rel="stylesheet" href="css/userrelation.css">
     <link rel="stylesheet" href="css/mynav.css">
+    <link rel="stylesheet" href="css/postMoment.css">
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_1963893_2cwb6qthxh5.css">
+    <script src="js/jquery-2.0.0.min.js"></script>
     <script src="css/layui/layui.js"></script>
     <script src="js/ManageUrl.js"></script>
-    <script src="js/jquery-2.0.0.min.js"></script>
+    <script src="js/operation.js"></script>
 </head>
-<style>
-    #box {
-        width: 500px;
-        height: 500px;
-        background-color: white;
-        border-width: 1px;
-        margin: 10px;
-    }
-
-    #header {
-        border-bottom-style: solid;
-        border-bottom-color: #92B8B1;
-        border-width: 1px;
-    }
-
-    #header_font {
-        padding: 10px;
-        font-size: medium;
-    }
-
-    #second {
-        width: 500px;
-    }
-
-    #second_count {
-        padding: 10px;
-        margin-right: 10px;
-        float: right;
-    }
-
-    #header_textarea {
-        resize: none;
-        width: 460px;
-        height: 100px;
-        margin-left: 20px;
-        float: left;
-    }
-
-    #thirth {
-        width: 500px;
-    }
-
-    #fourth {
-        width: 500px;
-    }
-
-    #header_bt {
-        float: right;
-        margin-right: 20px;
-        margin-top: 170px;
-    }
-</style>
 <body>
 <div class="bodycontent" style="width: 1024px;height: auto; margin: 0 auto;">
 
     <div class="nav">
         <ul class="mynav">
             <li class="mynavli"><a class="active" href="MainPage.html">主页</a></li>
-            <li class="mynavli"><a href="#news">新闻</a></li>
-            <li class="mynavli"><a href="#contact">联系</a></li>
-            <li class="mynavli"><a href="#about">关于</a></li>
             <li class="mynavli"><a href="FriendPage.html">好友动态</a></li>
+            <li class="mynavli"><a href="#news">我</a></li>
+            <li class="mynavli"><a href="#news">圈子</a></li>
+            <li class="mynavli"><a href="#about">关于</a></li>
             <li class="mynavlibtn"><i class="iconfont iconxieweibo" onclick="loadPostMoment()"></i></a></li>
             <li class="mynavliinput"><input type="text" name="" id="" value="" class="searchsmt" placeholder="发现新鲜事"/>
             </li>
@@ -157,28 +107,28 @@
                     <ul class="userfollowfriendlsit">
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="followfriendpic1"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="followfriendname1">
 							秦始皇
 						</span>
                         </li>
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="followfriendpic2"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="followfriendname2">
 							秦始皇
 						</span>
                         </li>
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="followfriendpic3"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="followfriendname3">
 							秦始皇
 						</span>
                         </li>
@@ -196,28 +146,28 @@
                     <ul class="userfollowfriendlsit">
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="fansfriendpic1"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="fansfriendname1">
 							秦始皇
 						</span>
                         </li>
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="fansfriendpic2"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="fansfriendname2">
 							秦始皇
 						</span>
                         </li>
                         <li class="userfollowfriend">
 						<span class="userfollowfriendhead">
-							<img class="userfollowfriendpic"
+							<img class="userfollowfriendpic" id="fansfriendpic3"
                                  src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg"/>
 						</span>
-                            <span class="userfollowfriendname">
+                            <span class="userfollowfriendname" id="fansfriendname3">
 							秦始皇
 						</span>
                         </li>
@@ -302,226 +252,6 @@
             , upload = layui.upload;
     });
 
-    window.onload = function () {
-        $.ajax({
-            url: url_getMainPageInfo,//此接口会当前用户的cookie返回所有动态
-            type: "get",
-            dataType: "json",
-            async: false,
-            xhrFields: {withCredentials: true},
-            crossDomain: true,
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                var moments = result.data.moments;
-                var res = [];
-                for (var i in moments) {
-                    var elemet = moments[i]
-                    var content = '<div class="maincontent">\n' +
-                        '        <div class="headiconblock">\n' +
-                        '            <img class="headicon" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg" alt="Paris">\n' +
-                        '        </div>\n' +
-                        '        <div class="usercontent">\n' +
-                        '            <div class="username">\n' +
-                        '                ' + elemet.name + '\n' +
-                        '            </div>\n' +
-                        '            <div class="usernormalinfo">\n' +
-                        '                <div class="usersendtime">\n' +
-                        '                    ' + elemet.momentSendTime.substr(0, 10) + '\n' +
-                        '                </div>\n' +
-                        '                <div class="userdevice">\n' +
-                        '                    ' + elemet.userDevice + '\n' +
-                        '                </div>\n' +
-                        '                <div class="usermonmentstatus">\n' +
-                        '                    ' + idEdit(elemet.isEdit) + '\n' +
-                        '                </div>\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '        <div class="MomentInfo">\n' +
-                        '            <div class="MomentText">\n' +
-                        '                ' + elemet.momentContentWords + '\n' +
-                        '            </div>\n' +
-                        '            <div class="MomentImgBlock">\n'
-
-                    var body = '';
-                    var picIds = elemet.picIds;
-                    for (var j in picIds) {
-                        console.log(picIds[j])
-                        body += '<img class="MomentImg" src="' + picIds[j] + '"/>\n'
-                    }
-
-                    var foot =
-                        '            </div>\n' +
-                        '            <div class="useroperation">\n' +
-                        '                <ul class="useroperationul">\n' +
-                        '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconshoucang"></i>收藏</span>\n' +
-                        '                        <span class="collectcount">' + elemet.collectCount + '</span>\n' +
-                        '                    </li>\n' +
-                        '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconicon--"></i>转发</span>\n' +
-                        '                        <span class="sharecount">' + elemet.shareCount + '</span>\n' +
-                        '                    </li>\n' +
-                        '                    <li class="useroperationli">\n' +
-                        '                        <span onclick="loadComment()"><i id="' + elemet.id + '" class="iconfont iconpinglun"></i>评论</span>\n' +
-                        '                        <span class="commentcount">' + elemet.commentCount + '</span>\n' +
-                        '                    </li>\n' +
-                        '                    <li class="useroperationli">\n' +
-                        '                        <span><i id="' + elemet.id + '" class="iconfont iconweibiaoti-" onclick="like(this.id)"></i></span>\n' +
-                        '                        <span class="likecount">' + elemet.likeCount + '</span>\n' +
-                        '                    </li>\n' +
-                        '                </ul>\n' +
-                        '            </div>\n' +
-                        '        </div>\n' +
-                        '    </div>'
-                    res.push(content + body + foot)
-                }
-                $("#momentblock").html(res)
-                $("#momentcount").text(result.data.moments.length)
-                $("[id=followcount]").each(function () {
-                    $(this).text("2");
-                });
-                $("[id=fanscount]").each(function () {
-                    $(this).text("2");
-                });
-            }
-        })
-    }
-
-    function idEdit(flag) {
-        return flag == 0 ? "已编辑" : "未编辑"
-    }
-
-    //加载评论脚本
-    function loadComment() {
-        console.log("开始")
-        var content = "\t\t\t\t\t\t<li>\n" +
-            "\t\t\t\t\t\t\t<div>\n" +
-            "\t\t\t\t\t\t\t\t<div>\n" +
-            "\t\t\t\t\t\t\t\t\t<img src=\"https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg\" style=\"\twidth: 40px;height: 40px;border-radius: 100%;margin-top: 10px;float: left;\"/>\n" +
-            "\t\t\t\t\t\t\t\t</div>\n" +
-            "\t\t\t\t\t\t\t\t<div>\n" +
-            "\t\t\t\t\t\t\t\t\t<h5 style=\"float: left;margin-top: 20px;margin-left: 10px;width: 91%;margin-bottom: 20px;\">秦始皇</h5>\n" +
-            "\t\t\t\t\t\t\t\t\t<p style=\"margin-left: 40px;\">先天下之忧而忧，后天下之乐而乐。</p>\n" +
-            "\t\t\t\t\t\t\t\t</div>\n" +
-            "\t\t\t\t\t\t\t</div>\n" +
-            "\t\t\t\t\t\t</li>"
-        $("#commentHTML").html(content + content + content)
-
-        console.log("结束")
-    }
-
-    //加载动态上传窗口
-    var files;
-
-    function loadPostMoment() {
-        layui.use('layer', function () {
-            var layer = layui.layer;
-            layer.open({
-                type: 1
-                , content:
-                    '<div id="box">\n' +
-                    '    <div id="header">\n' +
-                    '        <p id="header_font">有什么新鲜事想告诉大家？</p>\n' +
-                    '    </div>\n' +
-                    '    <div id="second">\n' +
-                    '        <p id="second_count">已输入i字</p>\n' +
-                    '    </div>\n' +
-                    '    <div id="thirth">\n' +
-                    '        <textarea id="header_textarea"></textarea>\n' +
-                    '    </div>\n' +
-                    '    <div class="layui-upload" style="float: left;margin-top: 10px;height: 260px">\n' +
-                    '        <blockquote class="layui-elem-quote layui-quote-nm">\n' +
-                    '            预览图：\n' +
-                    '            <div class="layui-upload-list" id="demo2"></div>\n' +
-                    '        </blockquote>\n' +
-                    '    </div>\n' +
-                    '    <div id="fourth" style="float: right">\n' +
-                    '        <button type="button" class="layui-btn" id="test9" style="float: right;margin-right: 10px;margin-left: 10px">开始上传</button>\n' +
-                    '        <button type="button" class="layui-btn layui-btn-normal" id="test8" style="float: right">选择文件</button>\n' +
-                    '<!--        <button id="header_bt" type="button" class="layui-btn layui-btn-danger">发送动态</button>-->\n' +
-                    '    </div>\n' +
-                    '</div>'
-                , area: ['520px', '570px']//控制长宽
-                , success: function () {
-                    layui.use('upload', function () {
-                        var $ = layui.jquery
-                            , upload = layui.upload;
-                        //多图片上传
-                        //选完文件后不自动上传
-                        upload.render({
-                            elem: '#test8'
-                            //, url: 'http://192.168.2.223:6729/upload/file' //改成您自己的上传接口
-                            , auto: false
-                            , multiple: true
-                            //, bindAction: '#test9'
-                            , choose: function (obj) {
-                                files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
-                                //预读本地文件示例，不支持ie8
-                                obj.preview(function (index, file, result) {
-                                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img" style="width: 100px;height: 100px;margin-right: 10px">')
-                                });
-                            }
-                            , done: function (res) {
-                                layer.msg('上传成功');
-                                console.log(res)
-                            }
-                        });
-                    });
-                    //上传点击事件
-                    $("#test9").on("click", function () {
-                        var form = new FormData();
-                        for (let i in files) {
-                            form.append("file", files[i]);
-                        }
-                        form.append("momentContentWords", $('#header_textarea').val())
-                        form.append("userDevice", 'ipone12')
-                        form.append("isEdit", 0)
-                        $.ajax({
-                            url: url_fileUpload,
-                            type: "post",
-                            dataType: "json",
-                            async: false,
-                            xhrFields: {withCredentials: true},
-                            crossDomain: true,
-                            contentType: false,
-                            processData: false,
-                            data: form,
-                            success: function (result) {
-                                if (result.code == 200) {
-                                    layer.msg("上传成功！", {icon: 6});
-                                    ifclose();
-                                } else if (result.code == 500) {
-                                    layer.msg(result.msg, {icon: 5});
-                                }
-                            }
-                        })
-                    });
-                }
-            });
-        });
-    }
-
-    function like(id) {
-        form.append("momentId", id)
-        $.ajax({
-            url: url_like,
-            type: "get",
-            dataType: "json",
-            async: true,
-            xhrFields: {withCredentials: true},
-            crossDomain: true,
-            //contentType: false,
-            //processData: false,
-            data: {"MomentId": id},
-            success: function (result) {
-                if (result.code == 1000) {
-                    layer.msg('点赞成功！', {icon: 1});
-                } else if (result.code == 500) {
-                    layer.msg('点赞失败！', {icon: 1});
-                }
-            }
-        })
-    }
+    window.onload = getMainPageInfo(url_getMainPageInfo_124);
 </script>
 </html>

@@ -1,5 +1,28 @@
 //定义一些全局的url
-var switcher=107
+var switcher=124
+
+var url_getFriendMoment_107 = 'http://192.168.1.107:8081/v1/rest/getFriendMoment'
+var url_getFriendMoment_124 = 'http://192.168.2.124:8081/v1/rest/getFriendMoment'
+
+var url_getMainPageInfo_107 = 'http://192.168.1.107:8081/v1/rest/getMainPageInfo'
+var url_getMainPageInfo_124 = 'http://192.168.2.124:8081/v1/rest/getMainPageInfo'
+
+var url_fileUpload_107 = 'http://192.168.1.107:8081/v1/rest/fileUpload'
+var url_fileUpload_124 = 'http://192.168.2.124:8081/v1/rest/fileUpload'
+
+var url_like_107 = 'http://192.168.1.107:8081/v1/rest/like'
+var url_like_124 = 'http://192.168.2.124:8081/v1/rest/like'
+
+var url_collect_107 = 'http://192.168.1.107:8081/v1/rest/collect'
+var url_collect_124 = 'http://192.168.2.124:8081/v1/rest/collect'
+
+var url_addCookie_107 = 'http://192.168.1.107:8081/v1/rest/addCookie'
+var url_addCookie_124 = 'http://192.168.2.124:8081/v1/rest/addCookie'
+var url_getComment_107 = 'http://192.168.1.107:8081/v1/rest/getComment'
+var url_getComment_124 = 'http://192.168.2.124:8081/v1/rest/getComment'
+var url_getCookie_107 = 'http://192.168.1.107:8081/v1/rest/getCookie'
+var url_getCookie_124 = 'http://192.168.2.124:8081/v1/rest/getCookie'
+
 
 var url_getMainPageInfo
 var url_getFriendMoment;
@@ -8,27 +31,7 @@ var url_like;
 var url_collect;
 var url_addCookie
 var url_getCookie
-
-var url_getFriendMoment_107 = 'http://192.168.1.107:6729/v1/rest/getFriendMoment'
-var url_getFriendMoment_223 = 'http://192.168.2.223:6729/v1/rest/getFriendMoment'
-
-var url_getMainPageInfo_107 = 'http://192.168.1.107:6729/v1/rest/getMainPageInfo'
-var url_getMainPageInfo_223 = 'http://192.168.2.223:6729/v1/rest/getMainPageInfo'
-
-var url_fileUpload_107 = 'http://192.168.1.107:6729/v1/rest/fileUpload'
-var url_fileUpload_223 = 'http://192.168.2.223:6729/v1/rest/fileUpload'
-
-var url_like_107 = 'http://192.168.1.107:6729/v1/rest/like'
-var url_like_223 = 'http://192.168.2.223:6729/v1/rest/like'
-
-var url_collect_107 = 'http://192.168.1.107:6729/v1/rest/collect'
-var url_collect_223 = 'http://192.168.2.223:6729/v1/rest/collect'
-
-var url_addCookie_107 = 'http://192.168.1.107:6729/v1/rest/addCookie'
-var url_addCookie_223 = 'http://192.168.2.223:6729/v1/rest/addCookie'
-
-var url_getCookie_107 = 'http://192.168.1.107:6729/v1/rest/getCookie'
-var url_getCookie_223 = 'http://192.168.2.223:6729/v1/rest/getCookie'
+var url_getComment
 
 if (switcher===107){
     url_getMainPageInfo=url_getMainPageInfo_107
@@ -38,13 +41,15 @@ if (switcher===107){
     url_collect=url_collect_107
     url_addCookie=url_addCookie_107
     url_getCookie=url_getCookie_107
+    url_getComment=url_getComment_107
 }
-if (switcher===223){
-    url_getMainPageInfo=url_getMainPageInfo_223
-    url_getFriendMoment=url_getFriendMoment_223
-    url_fileUpload = url_fileUpload_223
-    url_like = url_like_223
-    url_collect=url_collect_223
-    url_addCookie=url_addCookie_223
-    url_getCookie=url_getCookie_223
+if (switcher===124){
+    url_getMainPageInfo=url_getMainPageInfo_124
+    url_getFriendMoment=url_getFriendMoment_124
+    url_fileUpload = url_fileUpload_124
+    url_like = url_like_124
+    url_collect=url_collect_124
+    url_addCookie=url_addCookie_124
+    url_getCookie=url_getCookie_124
+    url_getComment=url_getComment_124
 }

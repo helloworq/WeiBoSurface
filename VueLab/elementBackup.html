@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="//unpkg.com/vue/dist/vue.js"></script>
+    <script src="//unpkg.com/element-ui@2.14.1/lib/index.js"></script>
+</head>
+<style>
+    @import url("//unpkg.com/element-ui@2.14.1/lib/theme-chalk/index.css");
+</style>
+<body>
+
+<div id="app">
+    <el-upload
+            ref="upload"
+            action="https://jsonpl11aceholder.typic11ode.com/pos1ts/"
+            list-type="picture-card"
+            :on-preview="handlePictureCardPreview"
+            :on-remove="handleRemove"
+            :auto-upload="false"
+            :on-error="handleError"
+            :on-success="submitSuccess"
+            :multiple= "true"
+            >
+        <i class="el-icon-plus"></i>
+    </el-upload>
+    <el-dialog :visible.sync="dialogVisible">
+        <img width="100%" :src="dialogImageUrl" alt="">
+    </el-dialog>
+    <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
+
+</div>
+
+</body>
+<script>
+    var Main = {
+        data() {
+            return {
+                dialogImageUrl: '',
+                dialogVisible: false
+            };
+        },
+        methods: {
+            submitUpload() {
+                this.$refs.upload.submit();
+            },
+            handleRemove(file, fileList) {
+                console.log(file, fileList);
+            },
+            handlePictureCardPreview(file) {
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            handleError(){
+                this.$message.error('上传失败!请检查url是否正确');
+            },
+            submitSuccess(){
+                this.$message.error('上传失败!请检查url是否正确');
+            }
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
+
+</script>
+</html>
