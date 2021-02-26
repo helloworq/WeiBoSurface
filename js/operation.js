@@ -252,11 +252,12 @@ function loadComment(id) {
                                     //alert("进入控制器")
                                     layui.each(res.data, function (index, item) {
                                         lis.push(
-                                            '<li>' + item.id + '</li>' +
-                                            '                <li><div class="card">\n' +
+                                            '' +
+                                            '<li>' +
+                                            '           <div class="card">\n' +
                                             '                    <div class="card-feed">\n' +
                                             '                        <div class="avator">\n' +
-                                            '                            <img src="/img/5050.jpg">\n' +
+                                            '                            <img  class="headicon" src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1418315404,2308746069&fm=26&gp=0.jpg">\n' +
                                             '                        </div>\n' +
                                             '                        <!--微博内容-->\n' +
                                             '                        <div class="content" node-type="like">\n' +
@@ -267,7 +268,7 @@ function loadComment(id) {
                                             '                                </div>\n' +
                                             '                            </div>\n' +
                                             '                            <p class="txt" node-type="feed_list_content" nick-name="隔夜饭馊特了">' + item.commentContent + '</p>\n' +
-                                            '                            <p class="from"><!--a >今天 19:36 转赞人数超过40</a--></p>\n' +
+                                            '                            <p class="from"></p>\n' +
                                             '                        </div>\n' +
                                             '                    </div>\n' +
                                             '                </div>' +
@@ -296,7 +297,8 @@ function sendMyComment() {
     $.ajax({
         ansyc: false,//是否异步发送
         type: "POST",
-        url: "/controller/actionOfComment",//指向loginCheck处理器
+        url: url_sendComment+"?text="+$("#textareaText").val()+"&momentId="+receviedCommentID,//指向loginCheck处理器
+        xhrFields: {withCredentials: true},
         data: {
             "textareaText": $("#textareaText").val(),
             "receviedCommentID": receviedCommentID

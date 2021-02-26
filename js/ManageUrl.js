@@ -23,6 +23,8 @@ var url_getComment_124 = 'http://192.168.2.124:8081/v1/rest/getComment'
 var url_getCookie_107 = 'http://192.168.1.107:8081/v1/rest/getCookie'
 var url_getCookie_124 = 'http://192.168.2.124:8081/v1/rest/getCookie'
 
+var url_sendComment_107 = 'http://192.168.1.107:8081/v1/rest/sendComment'
+var url_sendComment_124 = 'http://192.168.2.124:8081/v1/rest/sendComment'
 
 var url_getMainPageInfo
 var url_getFriendMoment;
@@ -32,6 +34,7 @@ var url_collect;
 var url_addCookie
 var url_getCookie
 var url_getComment
+var url_sendComment
 
 if (switcher===107){
     url_getMainPageInfo=url_getMainPageInfo_107
@@ -42,6 +45,7 @@ if (switcher===107){
     url_addCookie=url_addCookie_107
     url_getCookie=url_getCookie_107
     url_getComment=url_getComment_107
+    url_sendComment=url_sendComment_107
 }
 if (switcher===124){
     url_getMainPageInfo=url_getMainPageInfo_124
@@ -52,4 +56,5 @@ if (switcher===124){
     url_addCookie=url_addCookie_124
     url_getCookie=url_getCookie_124
     url_getComment=url_getComment_124
+    url_sendComment=url_sendComment_124
 }

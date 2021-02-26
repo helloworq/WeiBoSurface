@@ -47,12 +47,6 @@
 </body>
 
 <script type="text/javascript">
-    var BYTES_PER_CHUNK = 1000; // 每个文件切片大小定为1MB .
-    var slices;
-    var totalSlices;
-    var FileController = "http://localhost:8888/upload"; // 接收上传文件的后台地址
-
-
     $(function () {
         // 批量导入按钮
         $("#batchImportBtn").click(function () {
@@ -71,7 +65,7 @@
             $("#progressBar").parent().show();
             $("#progressBar").parent().addClass("active");
             // 上传文件
-            UpladFile();
+            sendRequest()
         })
 
         // 文件修改时
@@ -89,34 +83,15 @@
             xhr.abort()
         })
 
-        function UpladFile() {
-            var blob = $("#batchFile").get(0).files[0]; // js 获取文件对象
-            console.info("上传的文件：" + blob);
-            var xhr = new XMLHttpRequest();
-            var form = new FormData();
-            form.append("file", blob);
-            xhr.open("post", FileController, true);
-            xhr.onload = function () {//完成事件
-                alert("上传完成");
-                $("#batchUploadBtn").attr('disabled', false);
-                $("#batchUploadBtn").val("上传");
-                $("#progressBar").parent().removeClass("active");
-                $("#progressBar").parent().hide();
-            };
-            xhr.upload.onprogress = function (evt) {
-                console.log(evt)
-                var progressBar = $("#progressBar");
-                if (evt.lengthComputable) {
-                    console.log(xhr.onload)
-                    var completePercent = Math.round(evt.loaded / evt.total * 100) + "%";
-                    progressBar.width(completePercent);
-                    $("#batchUploadBtn").val("正在上传 " + completePercent);
-                }
-            }
-            //xhr.upload.addEventListener("progress", progressFunction, false);
-            xhr.send(form);
-        }
+        //发送请求
+        /**
+         * 发送请求之前先把全部切片文件信息发送给后台
+         * 后台比对收到的切片信息与本地已存储的切片
+         * 将未存储切片序号传回前端
+         * 前端根据收到的信息发送切片
+         */
     })
 
 </script>
+
 </html>

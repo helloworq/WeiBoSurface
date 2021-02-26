@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/jquery-2.0.0.min.js"></script>
+</head>
+
+<body>
+<fieldset>
+    <h1>Ajax文件上传进度条</h1>
+
+    <!-- Modal -->
+    <div id="batchImportModal" class="modal fade" role="dialog"
+         aria-labelledby="gridSystemModalLabel">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">批量导入用户</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" id="passwordDiv">
+                        <label>选择用户数据文件</label>
+                        <input class="form-control" type="file" id="batchFile">
+                    </div>
+                    <div class="progress progress-striped active" style="display: none">
+                        <div id="progressBar" class="progress-bar progress-bar-info"
+                             role="progressbar" aria-valuemin="0" aria-valuenow="0"
+                             aria-valuemax="100" style="width: 0%">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input id="batchUploadBtn" type="submit" name="submit" class="btn btn-success" value="上传"/>
+                        <input id="cancelBtn" type="submit" name="submit" class="btn btn-success" value="暂停"/>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</fieldset>
+
+
+</body>
+
+<script type="text/javascript">
+    var BYTES_PER_CHUNK = 1024 * 1024 * 100; // 每个文件切片大小定为100MB .
+    var slices;
+    var totalSlices;
+    var endFlag = true
+
+    $(function () {
+        // 批量导入按钮
+        $("#batchImportBtn").click(function () {
+            $('#batchImportModal').modal('show');
+        })
+        var base = $("#base").val();
+        // 上传按钮
+        $("#batchUploadBtn").attr('disabled', true);
+        // 上传文件按钮点击的时候
+        $("#batchUploadBtn").click(function () {
+            // 进度条归零
+            $("#progressBar").width("0%");
+            // 上传按钮禁用
+            $(this).attr('disabled', true);
+            // 进度条显示
+            $("#progressBar").parent().show();
+            $("#progressBar").parent().addClass("active");
+            // 上传文件
+            sendRequest()
+        })
+
+        // 文件修改时
+        $("#batchFile").change(function () {
+            $("#batchUploadBtn").val("上传");
+            $("#progressBar").width("0%");
+            var file = $(this).prop('files');
+            if (file.length != 0) {
+                $("#batchUploadBtn").attr('disabled', false);
+            }
+        });
+
+        // 取消上传按钮
+        $("#cancelBtn").click(function () {
+            //xhr.abort()
+            getSplitFileInfo()
+            //generateSplitFileInfo()
+        })
+
+
+        /**
+         * 发送请求之前先把全部切片文件信息发送给后台
+         * 后台比对收到的切片信息与本地已存储的切片
+         * 将未存储切片序号传回前端
+         * 前端根据收到的信息发送切片
+         */
+        //上传文件切片信息
+        function generateSplitFileInfo() {
+            var blob = $("#batchFile").get(0).files[0]; // js 获取文件对象
+            // 计算文件切片总数
+            var slices = Math.ceil(blob.size / BYTES_PER_CHUNK);
+            var fileName = []
+            var index = 1
+            for (let i = 0; i < slices; i++) {
+                fileName.push(blob.name + "-" + createUUID() + "-" + index + "-" + slices)//生成不重复随机文件名
+                index++
+            }
+            var xhr = new XMLHttpRequest()
+            var formData = new FormData()
+            formData.append("key", blob.name)
+            formData.append("splitFileInfo", fileName.toString())
+            xhr.open("post", "http://localhost:8888/saveSplitFileInfo")
+            xhr.send(formData)
+        }
+
+        //请求后台服务器，获取自己需要上传的分片信息
+        var isFinishTransformed = false
+
+        //getSplitFileInfoNumber
+        function getSplitFileInfo() {
+            //generateSplitFileInfo()
+            var xhr = new XMLHttpRequest()
+            var formData = new FormData()
+            formData.append("key", "Java 8实战.pdf")
+            xhr.open("post", "http://localhost:8888/getSplitFileInfoNumber")
+            console.log(xhr)
+            console.log(xhr.status)
+            xhr.send(formData)
+        }
+
+
+        //发送请求
+        function sendRequest() {
+            var blob = $("#batchFile").get(0).files[0]; // js 获取文件对象
+            var start = 0;
+            var end;
+            var index = 0;
+            // 计算文件切片总数
+            slices = Math.ceil(blob.size / BYTES_PER_CHUNK);
+
+            totalSlices = slices;
+
+            while (start < blob.size) {
+                end = start + BYTES_PER_CHUNK;
+                if (end > blob.size) {
+                    end = blob.size;
+                }
+                console.log("当前切片: " + index)
+                uploadFile(blob, index, start, end);
+                start = end;
+                index++;
+                if (index >= totalSlices)
+                    console.log("结束传输")
+            }
+        }
+
+        //上传文件
+        function uploadFile(blob, index, start, end) {
+            var fd;
+            var chunk;
+            var sliceIndex = blob.name + "-" + createUUID() + "-" + index + "-" + totalSlices;
+            var FileController = "http://localhost:8888/upload"; // 接收上传文件的后台地址
+
+            var xhr = new XMLHttpRequest();
+
+            chunk = blob.slice(start, end);//切割文件
+            fd = new FormData();
+            fd.append("file", chunk, sliceIndex);
+            xhr.open("post", FileController, true);
+            xhr.upload.onprogress = function (evt) {
+                var progressBar = $("#progressBar");
+                if (evt.lengthComputable) {
+                    var completePercent = Math.round(evt.loaded / evt.total * 100) + "%";
+                    progressBar.width(completePercent);
+                    $("#batchUploadBtn").val("正在上传 " + completePercent);
+                }
+            }
+            xhr.onload = function () {//完成事件
+                $("#batchUploadBtn").attr('disabled', false);
+                $("#batchUploadBtn").val("上传");
+                $("#progressBar").parent().removeClass("active");
+                $("#progressBar").parent().hide();
+            };
+            xhr.send(fd);
+        }
+    })
+
+    function createUUID() {
+        var d = new Date().getTime();
+        if (window.performance && typeof window.performance.now === "function") {
+            d += performance.now(); //use high-precision timer if available
+        }
+        var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = (d + Math.random() * 16) % 16 | 0;
+            d = Math.floor(d / 16);
+            return (c == 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+        });
+        return uuid;
+    }
+</script>
+
+</html>
